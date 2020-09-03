@@ -1,0 +1,173 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Categories">
+    <div class="categories">
+      <form [formGroup]="categoryForm"  (ngSubmit)="onSubmit()">
+        <div class="add-data">
+          <mat-form-field appearance="fill">
+            <mat-label>Add Category</mat-label>
+            <input matInput type="text" formControlName="name">
+          </mat-form-field>
+          <button mat-raised-button color="primary" [disabled]="categoryForm.invalid">Add</button>             
+        </div>
+        <div class="results">                 
+          <div formArrayName="categories" *ngFor="let c of categories.controls; let i=index">
+            <mat-card [formGroupName]="i">
+              <mat-form-field appearance="fill">
+                <mat-label>Select Area</mat-label>
+                <mat-select formControlName="area">
+                  <mat-option class="mat-subheading-1" value="general-knowledge">
+                    general-knowledge
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>                
+              <mat-form-field appearance="fill">
+                <mat-label>Category</mat-label>
+                <input matInput type="text" formControlName="value">
+              </mat-form-field>              
+              <button mat-raised-button color="primary" type="button" (click)="onUpdate(c.value)">Save</button>       
+              <button mat-raised-button color="warn" type="button" (click)="onDelete(c.value.key)">Delete</button>       
+            </mat-card>             
+          </div>          
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Sub Categories">
+    <div class="sub-categories">
+      <form [formGroup]="subCategoryForm" (ngSubmit)="onSubCategorySubmit()">
+        <div class="add-data">          
+          <mat-form-field appearance="fill">
+            <mat-label>Select Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option class="mat-subheading-1" *ngFor="let c of categoryList" [value]="c.key">
+                {{ c.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>   
+          <mat-form-field appearance="fill">
+            <mat-label>Enter Quiz name</mat-label>
+            <input matInput type="text" formControlName="name">
+          </mat-form-field>     
+          <div formGroupName="resource" class="resource">
+            <mat-form-field appearance="fill">
+              <mat-label>Select Area</mat-label>
+              <mat-select formControlName="type">
+                <mat-option class="mat-subheading-1" value="Youtube">
+                  Youtube
+                </mat-option>
+              </mat-select>
+            </mat-form-field>        
+            <mat-form-field appearance="fill">
+              <mat-label>Add Url</mat-label>
+              <input matInput type="text" formControlName="url">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Add description</mat-label>
+              <input matInput type="text" formControlName="description">
+            </mat-form-field>
+          </div>  
+          <button mat-raised-button color="primary" [disabled]="subCategoryForm.invalid">Add</button>                     
+        </div>
+        <div class="results">                 
+          <div formArrayName="subCategories" *ngFor="let c of subCategories.controls; let i=index">
+            <mat-card [formGroupName]="i">              
+              <mat-form-field appearance="fill">
+                <mat-label>Select Category</mat-label>
+                <mat-select formControlName="parent">
+                  <mat-option class="mat-subheading-1" *ngFor="let c of categoryList" [value]="c.key">
+                    {{ c.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>   
+              <mat-form-field appearance="fill">
+                <mat-label>Enter Quiz name</mat-label>
+                <input matInput type="text" formControlName="value">
+              </mat-form-field>     
+              <div formGroupName="resource" class="resource">
+                <mat-form-field appearance="fill">
+                  <mat-label>Select Area</mat-label>
+                  <mat-select formControlName="type">
+                    <mat-option class="mat-subheading-1" value="Youtube">
+                      Youtube
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>        
+                <mat-form-field appearance="fill">
+                  <mat-label>Add Url</mat-label>
+                  <input matInput type="text" formControlName="url">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Add description</mat-label>
+                  <input matInput type="text" formControlName="description">
+                </mat-form-field>
+              </div>       
+              <button mat-raised-button color="primary" type="button" (click)="onUpdate(c.value)">Save</button>       
+              <button mat-raised-button color="warn" type="button" (click)="onDelete(c.value.key)">Delete</button>       
+            </mat-card>             
+          </div>          
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Quiz">
+    <div class="quiz">
+      <form [formGroup]="quizForm" (ngSubmit)="onQuizSubmit()">
+        <div class="add-data">
+          <mat-form-field appearance="fill">
+            <mat-label>Select Quiz</mat-label>
+            <mat-select formControlName="category">
+              <mat-option class="mat-subheading-1" *ngFor="let c of subCategoryList" [value]="c.key">
+                {{ c.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>   
+          <mat-form-field appearance="fill">
+            <mat-label>Add Question</mat-label>
+            <input matInput type="text" formControlName="question">
+          </mat-form-field>          
+          <mat-radio-group formControlName="correct">                        
+            <div formArrayName="answers" *ngFor="let c of answers.controls; let i=index">            
+              <mat-card [formGroupName]="i">                             
+                <mat-radio-button class="example-radio-button" [value]="i"></mat-radio-button>
+                <mat-form-field appearance="fill">
+                  <mat-label>Enter Answer</mat-label>
+                  <input matInput type="text" formControlName="value">
+                </mat-form-field>     
+              </mat-card>
+            </div>          
+          </mat-radio-group>
+           <button mat-raised-button color="primary" [disabled]="quizForm.invalid">Add</button>        
+        </div>
+        <div formArrayName="questions" *ngFor="let q of questions.controls; let i=index">
+          <mat-card [formGroupName]="i">
+            <mat-form-field appearance="fill">
+              <mat-label>Select Quiz</mat-label>
+              <mat-select formControlName="category">
+                <mat-option class="mat-subheading-1" *ngFor="let c of subCategoryList" [value]="c.key">
+                  {{ c.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>   
+            <mat-form-field appearance="fill">
+              <mat-label>Question</mat-label>
+              <input matInput type="text" formControlName="question">
+            </mat-form-field>     
+            <mat-radio-group formControlName="correct">                        
+              <div formArrayName="answers" *ngFor="let c of answers.controls; let i=index">            
+                <mat-card [formGroupName]="i">                             
+                  <mat-radio-button class="example-radio-button" [value]="i"></mat-radio-button>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Enter Answer</mat-label>
+                    <input matInput type="text" formControlName="value">
+                  </mat-form-field>     
+                </mat-card>
+              </div>          
+            </mat-radio-group>
+            <button mat-raised-button color="primary" type="button" (click)="onQuestionUpdate(q.value)">Save</button>       
+            <button mat-raised-button color="warn" type="button" (click)="onQuestionDelete(q.value.key)">Delete</button>       
+          </mat-card>
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+</mat-tab-group>

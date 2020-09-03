@@ -1,0 +1,62 @@
+<div class="container">
+	<div class="score-actions">
+		<mat-card [ngStyle]="{'background': color$ | async}" class="mat-display-1" *ngIf="(hasResponses$ | async)">
+			{{ score$ | async }}
+		</mat-card>
+		<button mat-raised-button color="primary" (click)="onRetry()" *ngIf="(hasResponses$ | async)">
+      <mat-icon>replay</mat-icon>
+      Retry
+    </button>
+		<button mat-raised-button (click)="onNewQuiz()">New Quiz</button>
+	</div>
+
+	<div class="results">
+		<mat-accordion *ngIf="!(resultsIsLoading$ | async); else loader">
+			<ng-container *ngFor="let result of results$ | async">
+				<mat-expansion-panel hideToggle>
+					<mat-expansion-panel-header>
+						<mat-panel-description>
+							<div class="mat-small quiz">
+								{{ result.quiz }}
+							</div>
+						</mat-panel-description>
+						<mat-panel-description>
+							<div class="score">
+								{{ result.score }}
+							</div>
+						</mat-panel-description>
+						<mat-panel-description>
+							<div class="mat-small">
+								{{ result.date | date:'medium' }}
+							</div>
+						</mat-panel-description>
+					</mat-expansion-panel-header>
+					<div class="responses">
+						<ng-container *ngFor="let response of result.responses">
+              <div class="response">
+                <mat-card class="mat-caption">{{ response.question }}</mat-card>
+                <div class="answers">
+                  <ng-container *ngFor="let answer of response.answers">
+                    <button
+                      mat-raised-button                    
+                      [ngClass]="{ isSelected: answer.selected, isValid: answer.isCorrect }">
+                      {{answer.value}}
+                    </button>                  
+                  </ng-container>
+                </div>
+                <mat-divider></mat-divider>
+              </div>
+						</ng-container>
+					</div>
+				</mat-expansion-panel>
+			</ng-container>
+		</mat-accordion>
+	</div>
+</div>
+
+
+<ng-template #loader>
+	<div>
+		<mat-spinner color="accent" diameter="30"></mat-spinner>
+	</div>
+</ng-template>

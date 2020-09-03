@@ -1,0 +1,48 @@
+.categories, .sub-categories, .quiz {
+  padding: 20px;
+  .add-data {
+    display: flex;
+    justify-content: center;   
+    flex-wrap: wrap;
+    button {
+      height: 60px;
+    } 
+    > * {
+      margin: 0 10px;
+    }     
+    .resource {
+      > * {
+        margin: 0 10px;
+      }      
+    }    
+    .mat-radio-group {
+      display: flex;
+      > * {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.results {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .mat-card {
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      > * {
+        margin: 0 10px;
+      }    
+      .resource {
+        > * {
+          margin: 0 10px;
+        }  
+      } 
+      button {
+        height: 60px;
+      }     
+    }
+}
