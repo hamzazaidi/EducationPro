@@ -1,10 +1,10 @@
-import { Category } from "./Category"
+import { Category } from './Category';
 
 export interface Question {
   key: string;
-  question: string,
-  answers: Answer[],  
-  category: Category
+  question: string;
+  answers: Answer[];
+  category: Category;
 }
 
 
@@ -20,5 +20,5 @@ export interface Answer {
 export interface DisplayQuestions {
     key: string;
     question: string;
-    answers: Answer[]
+    answers: Answer[];
 }

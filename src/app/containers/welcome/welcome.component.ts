@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  form: FormGroup
+  form: FormGroup;
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder
@@ -19,17 +19,17 @@ export class WelcomeComponent implements OnInit {
     this.form = this.fb.group({
       name: [
         '',
-        { 
+        {
           updateOn: 'blur' ,
           validators: [ Validators.required ]
         }
       ],
-    })   
-    this.store.dispatch(ConfigActions.SetArea())
+    });
+    this.store.dispatch(ConfigActions.SetArea());
   }
 
   ngOnInit() {
-   
+
   }
 
   get formControl() {
@@ -38,12 +38,12 @@ export class WelcomeComponent implements OnInit {
 
   onSubmit() {
     const { name } = this.form.getRawValue();
-    this.store.dispatch(ConfigActions.SetUser({ payload: name }))
-    this.store.dispatch(RouterActions.Go({ payload: { path: ['/quiz'] } }))
+    this.store.dispatch(ConfigActions.SetUser({ payload: name }));
+    this.store.dispatch(RouterActions.Go({ payload: { path: ['/quiz'] } }));
   }
 
   onAuthenticate() {
-    this.store.dispatch(ConfigActions.AuthenticateUser())
+    this.store.dispatch(ConfigActions.AuthenticateUser());
   }
 
 }

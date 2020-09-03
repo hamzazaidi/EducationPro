@@ -1,5 +1,5 @@
-import { KeyValuePair, ResourceType } from "./KeyValuePair";
-import { Area } from "./ConfigState";
+import { KeyValuePair, ResourceType } from './KeyValuePair';
+import { Area } from './ConfigState';
 
 export interface Category extends KeyValuePair {
   parent: string;
@@ -8,6 +8,6 @@ export interface Category extends KeyValuePair {
     type: ResourceType;
     url: string;
     description: string;
-  }
+  };
 }
 

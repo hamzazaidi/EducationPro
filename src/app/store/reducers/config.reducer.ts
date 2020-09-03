@@ -1,6 +1,6 @@
-import { ConfigState, Area } from "../../models/ConfigState";
-import { createReducer, on } from '@ngrx/store'
-import { ConfigActions } from "../actions";
+import { ConfigState, Area } from '../../models/ConfigState';
+import { createReducer, on } from '@ngrx/store';
+import { ConfigActions } from '../actions';
 
 export const initialState: ConfigState = {
   area: Area.GeneralKnowledge,
@@ -12,7 +12,7 @@ export const initialState: ConfigState = {
     uid: '',
     roles: {}
   }
-}
+};
 
 
 export const reducer = createReducer(
@@ -21,21 +21,21 @@ export const reducer = createReducer(
     return {
       ...state,
       area: payload
-    }
+    };
   }),
   on(ConfigActions.AuthenticateUserSuccess, (state, { payload }) => {
     return {
       ...state,
       isAuthenticated: !!payload,
       user: !!payload ? { ...payload } : { ...initialState.user }
-    }
+    };
   }),
   on(ConfigActions.AuthenticateUserFailure, (state) => {
     return {
       ...state,
       isAuthenticated: false,
       user: { ...initialState.user }
-    }
+    };
   }),
   on(ConfigActions.SetUser, (state, { payload }) => {
     return {
@@ -45,13 +45,13 @@ export const reducer = createReducer(
         ...initialState.user,
         displayName: payload
       }
-    }
+    };
   }),
   on(ConfigActions.LogoutUserSuccess, (state) => {
     return {
       ...initialState
-    }
+    };
   })
-)
+);
 
 

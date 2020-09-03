@@ -1,54 +1,54 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { WelcomeComponent } from "./containers/welcome/welcome.component";
-import { QuizComponent } from "./containers/quiz/quiz.component";
-import { CanActivateHomeGuard } from "./guards/can-activate-home.guard";
-import { ResultsComponent } from "./containers/results/results.component";
-import { AdministratorComponent } from "./containers/administrator/administrator.component";
-import { CanActivateAdminGuard } from "./guards/can-activate-admin.guard";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { WelcomeComponent } from './containers/welcome/welcome.component';
+import { QuizComponent } from './containers/quiz/quiz.component';
+import { CanActivateHomeGuard } from './guards/can-activate-home.guard';
+import { ResultsComponent } from './containers/results/results.component';
+import { AdministratorComponent } from './containers/administrator/administrator.component';
+import { CanActivateAdminGuard } from './guards/can-activate-admin.guard';
 
 const routes: Routes = [
   {
-    path: ":area/welcome",
+    path: ':area/welcome',
     component: WelcomeComponent,
-    data: { title: "Welcome" }    
+    data: { title: 'Welcome' }
   },
   {
-    path: "quiz",
+    path: 'quiz',
     component: QuizComponent,
-    data: { title: "Quiz" },
+    data: { title: 'Quiz' },
     canActivate: [
       CanActivateHomeGuard
     ]
   },
   {
-    path: "results",
+    path: 'results',
     component: ResultsComponent,
-    data: { title: "Result" },
+    data: { title: 'Result' },
     canActivate: [
       CanActivateHomeGuard
     ]
   },
   {
-    path: "admin",
+    path: 'admin',
     component: AdministratorComponent,
-    data: { title: "Administrator" },
+    data: { title: 'Administrator' },
     canActivate: [
       CanActivateAdminGuard
-    ]    
+    ]
   },
   {
-    path: "settings",
+    path: 'settings',
     component: AdministratorComponent,
-    data: { title: "Administrator" },
+    data: { title: 'Administrator' },
     canActivate: [
       CanActivateAdminGuard
-    ]    
+    ]
   },
   {
-    path: "",
-    redirectTo: "/general-knowledge/welcome",
-    pathMatch: "full"
+    path: '',
+    redirectTo: '/general-knowledge/welcome',
+    pathMatch: 'full'
   }
 ];
 

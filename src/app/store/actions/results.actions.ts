@@ -1,6 +1,6 @@
-import { createAction, props } from "@ngrx/store";
-import { DisplayQuestions } from "../../models/Question";
-import { Result } from "../../models/Result";
+import { createAction, props } from '@ngrx/store';
+import { DisplayQuestions } from '../../models/Question';
+import { Result } from '../../models/Result';
 
 
 export enum ResultsActionTypes {
@@ -9,6 +9,6 @@ export enum ResultsActionTypes {
   LoadResultsFailure = '[Results] Load Results Failure'
 }
 
-export const LoadResults = createAction(ResultsActionTypes.LoadResults)
+export const LoadResults = createAction(ResultsActionTypes.LoadResults);
 export const LoadResultsSuccess = createAction(ResultsActionTypes.LoadResultsSuccess, props<{ payload: Result[] }>());
-export const LoadResultsFailure = createAction(ResultsActionTypes.LoadResultsFailure)
+export const LoadResultsFailure = createAction(ResultsActionTypes.LoadResultsFailure);

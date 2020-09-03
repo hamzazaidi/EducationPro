@@ -1,7 +1,7 @@
-import { createReducer, on } from "@ngrx/store";
-import { QuizState, QuizStatus } from "../../models/QuizState";
-import { Question, DisplayQuestions } from "../../models/Question";
-import { QuizActions, CategoryActions, QuestionActions } from "../actions";
+import { createReducer, on } from '@ngrx/store';
+import { QuizState, QuizStatus } from '../../models/QuizState';
+import { Question, DisplayQuestions } from '../../models/Question';
+import { QuizActions, CategoryActions, QuestionActions } from '../actions';
 
 
 
@@ -39,7 +39,7 @@ export const reducer = createReducer(
         ...state.categories,
         isLoading: true
       }
-   }
+   };
   }),
   on(CategoryActions.LoadCategoriesSuccess, (state: QuizState, { payload }): QuizState => {
     return {
@@ -48,7 +48,7 @@ export const reducer = createReducer(
         items: [ ...payload ],
         isLoading: false
       }
-   }
+   };
   }),
   on(CategoryActions.LoadCategoriesFailure, (state: QuizState): QuizState => {
     return {
@@ -57,7 +57,7 @@ export const reducer = createReducer(
         items: [],
         isLoading: false
       }
-   }
+   };
   }),
    on(QuestionActions.LoadQuestions, (state: QuizState): QuizState => {
     return {
@@ -66,7 +66,7 @@ export const reducer = createReducer(
         ...state.quizStore,
         isLoading: true
       }
-   }
+   };
   }),
   on(QuestionActions.LoadQuestionsSuccess, (state: QuizState, { payload }): QuizState => {
     return {
@@ -75,7 +75,7 @@ export const reducer = createReducer(
         items: [ ...payload ],
         isLoading: false
       }
-   }
+   };
   }),
   on(QuestionActions.LoadQuestionsFailure, (state: QuizState): QuizState => {
     return {
@@ -84,7 +84,7 @@ export const reducer = createReducer(
         items: [],
         isLoading: false
       }
-   }
+   };
   }),
   on(QuizActions.ResetQuizInStore, (state: QuizState): QuizState => {
     return {
@@ -94,41 +94,41 @@ export const reducer = createReducer(
         isLoading: false,
         items: []
       }
-   }
+   };
   }),
   on(QuizActions.UpdateForm, (state: QuizState, { payload }): QuizState => {
-    console.log('Update Home Form ==>', payload)
+    console.log('Update Home Form ==>', payload);
     return {
       ...state,
       form: { ...payload }
-   }
+   };
   }),
   on(QuizActions.ResetQuiz, (state: QuizState): QuizState => {
-    console.log('Reseting QUiz')
+    console.log('Reseting QUiz');
     return {
       ...initialState
-   }
+   };
   }),
    on(QuizActions.RetryQuiz, (state: QuizState): QuizState => {
-    console.log('Retrying', state)
-    const form = { ...state.form }
+    console.log('Retrying', state);
+    const form = { ...state.form };
     console.log('new State ==>', {
       ...initialState,
       form
-    })
+    });
     return {
       ...initialState,
       form
-   }
+   };
   }),
   on(QuizActions.ToggleResource, (state: QuizState): QuizState => {
     return {
       ...state,
       showResource: !state.showResource
-    }
+    };
   }),
-  on(QuizActions.ToggleRevealAnswer, (state: QuizState): QuizState => {    
-    const question: Question = state.quizStore.items.find(q => q.key === state.questionOnScreen.key)
+  on(QuizActions.ToggleRevealAnswer, (state: QuizState): QuizState => {
+    const question: Question = state.quizStore.items.find(q => q.key === state.questionOnScreen.key);
     const validAnswer = question.answers.find(a => a.isCorrect);
     return {
       ...state,
@@ -137,33 +137,33 @@ export const reducer = createReducer(
         answers: state.questionOnScreen.answers.map(a => ({ ...a, isCorrect: a.key === validAnswer.key }))
       },
       revealingAnswer: !state.revealingAnswer
-    }
+    };
   }),
   on(QuizActions.SelectAnswer, (state: QuizState, { payload }): QuizState => {
-      console.log('SelectAnswer ==>', payload);      
+      console.log('SelectAnswer ==>', payload);
       return {
         ...state,
         questionOnScreen: {
           ...state.questionOnScreen,
           answers: state.questionOnScreen.answers.map((a, i) => ({ ...a, selected: a.key === payload.key }))
         }
-      }
+      };
   }),
   on(QuizActions.SetQuestionOnScreen, (state: QuizState): QuizState => {
-    console.log('Set Question on Screen')
-    let responses = [ ...state.responses ]
+    console.log('Set Question on Screen');
+    let responses = [ ...state.responses ];
     let status = state.status;
     let q: Question;
     let questionOnScreen: DisplayQuestions;
-    if(!state.questionOnScreen.key) {      
-        q = state.quizStore.items[0]        
+    if (!state.questionOnScreen.key) {
+        q = state.quizStore.items[0];
     } else {
-      responses = [ ...state.responses, state.questionOnScreen ]
-      const index = state.quizStore.items.findIndex(item => item.key === state.questionOnScreen.key)
+      responses = [ ...state.responses, state.questionOnScreen ];
+      const index = state.quizStore.items.findIndex(item => item.key === state.questionOnScreen.key);
       q = state.quizStore.items[index + 1];
     }
 
-    if(responses.length === state.quizStore.items.length) {
+    if (responses.length === state.quizStore.items.length) {
       questionOnScreen = { ...initialState.questionOnScreen };
       status = QuizStatus.Finished;
     } else {
@@ -172,31 +172,31 @@ export const reducer = createReducer(
         key: q.key,
         question: q.question,
         answers: q.answers.map(a => ({ ...a, selected: false, isCorrect: false }))
-      }
+      };
     }
     return {
       ...state,
       status,
       responses,
       questionOnScreen
-    }
+    };
   }),
   on(QuizActions.SaveResults, (state: QuizState): QuizState => {
     return {
       ...state,
       savingResult: true
-    }
+    };
   }),
   on(QuizActions.SaveResultsSuccess, (state: QuizState): QuizState => {
     return {
       ...state,
       savingResult: false
-    }
+    };
   }),
   on(QuizActions.SaveResultsFailure, (state: QuizState): QuizState => {
     return {
       ...state,
       savingResult: false
-    }
+    };
   })
 );

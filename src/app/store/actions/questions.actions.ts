@@ -1,5 +1,5 @@
-import { createAction, props } from "@ngrx/store";
-import { Question } from "../../models/Question";
+import { createAction, props } from '@ngrx/store';
+import { Question } from '../../models/Question';
 
 
 export enum QuestionActionTypes {
@@ -8,6 +8,6 @@ export enum QuestionActionTypes {
   LoadQuestionsFailure = '[Questions] Load Questions Failure',
 }
 
-export const LoadQuestions = createAction(QuestionActionTypes.LoadQuestions, props<{ payload: string }>())
-export const LoadQuestionsSuccess = createAction(QuestionActionTypes.LoadQuestionsSuccess, props<{ payload: Question[] }>())
-export const LoadQuestionsFailure = createAction(QuestionActionTypes.LoadQuestionsFailure)
+export const LoadQuestions = createAction(QuestionActionTypes.LoadQuestions, props<{ payload: string }>());
+export const LoadQuestionsSuccess = createAction(QuestionActionTypes.LoadQuestionsSuccess, props<{ payload: Question[] }>());
+export const LoadQuestionsFailure = createAction(QuestionActionTypes.LoadQuestionsFailure);

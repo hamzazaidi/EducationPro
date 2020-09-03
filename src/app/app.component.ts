@@ -16,15 +16,15 @@ export class AppComponent {
   user$: Observable<User>;
   isAuthenticated$: Observable<boolean>;
   constructor(private store: Store<AppState>) {
-    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated))
+    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     this.user$ = this.store.pipe(select(selectUser));
   }
 
   onLogout() {
-    this.store.dispatch(ConfigActions.LogoutUser())
+    this.store.dispatch(ConfigActions.LogoutUser());
   }
 
   onSettings() {
-    this.store.dispatch(RouterActions.Go({ payload: { path: ['/settings'] } }))
+    this.store.dispatch(RouterActions.Go({ payload: { path: ['/settings'] } }));
   }
 }

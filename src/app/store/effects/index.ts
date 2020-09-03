@@ -11,4 +11,4 @@ export const effects: any [] = [
   CategoryEffects,
   Questionffects,
   ResultsEffects
-]
+];

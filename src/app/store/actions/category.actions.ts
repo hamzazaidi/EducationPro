@@ -1,5 +1,5 @@
-import { createAction, props } from "@ngrx/store";
-import { Category } from "../../models/Category";
+import { createAction, props } from '@ngrx/store';
+import { Category } from '../../models/Category';
 
 
 export enum CategoryActionTypes {
@@ -8,6 +8,6 @@ export enum CategoryActionTypes {
   LoadCategoriesFailure = '[Category] Load Categories Failure',
 }
 
-export const LoadCategories = createAction(CategoryActionTypes.LoadCategories)
-export const LoadCategoriesSuccess = createAction(CategoryActionTypes.LoadCategoriesSuccess, props<{ payload: Category[] }>())
-export const LoadCategoriesFailure = createAction(CategoryActionTypes.LoadCategoriesFailure)
+export const LoadCategories = createAction(CategoryActionTypes.LoadCategories);
+export const LoadCategoriesSuccess = createAction(CategoryActionTypes.LoadCategoriesSuccess, props<{ payload: Category[] }>());
+export const LoadCategoriesFailure = createAction(CategoryActionTypes.LoadCategoriesFailure);

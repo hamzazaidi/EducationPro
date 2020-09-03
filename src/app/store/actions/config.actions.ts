@@ -1,6 +1,6 @@
-import { createAction, props } from "@ngrx/store";
-import { Area } from "../../models/ConfigState";
-import { User } from "../../models/User";
+import { createAction, props } from '@ngrx/store';
+import { Area } from '../../models/ConfigState';
+import { User } from '../../models/User';
 
 
 export enum ConfigActionTypes {
@@ -15,18 +15,18 @@ export enum ConfigActionTypes {
 }
 
 
-export const SetUser = createAction(ConfigActionTypes.SetUser, props<{ payload: 'string' }>())
+export const SetUser = createAction(ConfigActionTypes.SetUser, props<{ payload: 'string' }>());
 
-export const SetArea = createAction(ConfigActionTypes.SetArea)
+export const SetArea = createAction(ConfigActionTypes.SetArea);
 
 export const SetAreaSuccess = createAction(ConfigActionTypes.SetAreaSuccess, props<{ payload: Area }>());
 
-export const AuthenticateUser = createAction(ConfigActionTypes.AuthenticateUser)
+export const AuthenticateUser = createAction(ConfigActionTypes.AuthenticateUser);
 
-export const AuthenticateUserSuccess = createAction(ConfigActionTypes.AuthenticateUserSuccess, props<{ payload: User }>())
+export const AuthenticateUserSuccess = createAction(ConfigActionTypes.AuthenticateUserSuccess, props<{ payload: User }>());
 
-export const AuthenticateUserFailure = createAction(ConfigActionTypes.AuthenticateUserFailure)
+export const AuthenticateUserFailure = createAction(ConfigActionTypes.AuthenticateUserFailure);
 
-export const LogoutUser = createAction(ConfigActionTypes.LogoutUser)
+export const LogoutUser = createAction(ConfigActionTypes.LogoutUser);
 
-export const LogoutUserSuccess = createAction(ConfigActionTypes.LogoutUserSuccess)
+export const LogoutUserSuccess = createAction(ConfigActionTypes.LogoutUserSuccess);

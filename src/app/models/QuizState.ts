@@ -1,6 +1,6 @@
-import { KeyValuePair } from "./KeyValuePair";
-import { Question, Answer, DisplayQuestions } from "./Question";
-import { Category } from "./Category"
+import { KeyValuePair } from './KeyValuePair';
+import { Question, Answer, DisplayQuestions } from './Question';
+import { Category } from './Category';
 
 export enum QuizStatus {
   NotStarted = 1,
@@ -20,8 +20,8 @@ export interface QuizState {
   form: {
     category: string;
     subCategory: string;
-  },
-  status: QuizStatus,
-  responses: DisplayQuestions[],
+  };
+  status: QuizStatus;
+  responses: DisplayQuestions[];
   savingResult: boolean;
 }

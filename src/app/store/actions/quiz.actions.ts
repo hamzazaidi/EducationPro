@@ -1,6 +1,6 @@
-import { createAction, props } from "@ngrx/store";
-import { Answer } from "../../models/Question";
-import { Category } from "../../models/Category"
+import { createAction, props } from '@ngrx/store';
+import { Answer } from '../../models/Question';
+import { Category } from '../../models/Category';
 
 
 
@@ -20,8 +20,8 @@ export enum QuizActionTypes {
 }
 
 export const UpdateForm = createAction(QuizActionTypes.UpdateForm, props<{ payload: { category: string, subCategory: string } }>());
-export const SetQuizInStore = createAction(QuizActionTypes.SetQuizInStore)
-export const ResetQuizInStore = createAction(QuizActionTypes.ResetQuizInStore)
+export const SetQuizInStore = createAction(QuizActionTypes.SetQuizInStore);
+export const ResetQuizInStore = createAction(QuizActionTypes.ResetQuizInStore);
 export const SetQuestionOnScreen = createAction(QuizActionTypes.SetQuestion);
 export const SelectAnswer = createAction(QuizActionTypes.SelectAnswer, props<{ payload: Answer }>());
 export const ResetQuiz = createAction(QuizActionTypes.ResetQuiz);
@@ -29,6 +29,6 @@ export const RetryQuiz = createAction(QuizActionTypes.RetryQuiz);
 export const ToggleRevealAnswer = createAction(QuizActionTypes.ToggleRevealAnswer);
 export const ToggleResource = createAction(QuizActionTypes.ToggleResource);
 
-export const SaveResults = createAction(QuizActionTypes.SaveResults)
-export const SaveResultsSuccess = createAction(QuizActionTypes.SaveResultsSuccess)
-export const SaveResultsFailure = createAction(QuizActionTypes.SaveResultsFailure)
+export const SaveResults = createAction(QuizActionTypes.SaveResults);
+export const SaveResultsSuccess = createAction(QuizActionTypes.SaveResultsSuccess);
+export const SaveResultsFailure = createAction(QuizActionTypes.SaveResultsFailure);

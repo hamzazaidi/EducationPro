@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { auth } from "firebase/app";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { auth } from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument
-} from "@angular/fire/firestore";
+} from '@angular/fire/firestore';
 
-import { Observable, of } from "rxjs";
-import { switchMap } from "rxjs/operators";
-import { User } from "../models/User";
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { User } from '../models/User';
 
 
 @Injectable()
@@ -42,21 +42,21 @@ export class AuthService {
 
    private updateUserData(user) {
     // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);    
-    const data = { 
-      uid: user.uid, 
-      email: user.email, 
-      displayName: user.displayName, 
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
       photoURL: user.photoURL,
       roles: {
         subscriber: true
       }
-    } 
-    return userRef.set(data, { merge: true })
+    };
+    return userRef.set(data, { merge: true });
 
   }
 
   async signOut() {
-    await this.afAuth.signOut();    
+    await this.afAuth.signOut();
   }
 }

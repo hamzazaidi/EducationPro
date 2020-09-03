@@ -1,4 +1,4 @@
-import { Area } from "./ConfigState";
+import { Area } from './ConfigState';
 
 export enum ResourceType {
   Youtube = 1

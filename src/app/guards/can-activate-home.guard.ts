@@ -16,14 +16,14 @@ export class CanActivateHomeGuard implements CanActivate {
      return this.authSvc.user$.pipe(
       take(1),
       tap(user => {
-        if(user) {
-          this.store.dispatch(ConfigActions.AuthenticateUserSuccess({ payload: user }))                       
+        if (user) {
+          this.store.dispatch(ConfigActions.AuthenticateUserSuccess({ payload: user }));
         }
       }),
       map(user => user ? true : false),
       tap(isAuthenticated => {
         if (!isAuthenticated) {
-          this.store.dispatch(RouterActions.Go({ payload: { path: ['/'] } }))
+          this.store.dispatch(RouterActions.Go({ payload: { path: ['/'] } }));
         }
       })
     );

@@ -1,13 +1,13 @@
-import { ResultState } from "../../models/ResultState";
-import { createReducer, on } from '@ngrx/store'
-import { ResultsActions } from "../actions";
+import { ResultState } from '../../models/ResultState';
+import { createReducer, on } from '@ngrx/store';
+import { ResultsActions } from '../actions';
 
 export const initialState: ResultState = {
   resultsHistory: {
     isLoading: false,
     results: []
   }
-}
+};
 
 
 export const reducer = createReducer(
@@ -19,7 +19,7 @@ export const reducer = createReducer(
         ...state.resultsHistory,
         isLoading: true
       }
-    }
+    };
   }),
   on(ResultsActions.LoadResultsSuccess, (state: ResultState, { payload }): ResultState => {
     return {
@@ -28,7 +28,7 @@ export const reducer = createReducer(
         results: [ ...payload ],
         isLoading: false
       }
-    }
+    };
   }),
   on(ResultsActions.LoadResultsFailure, (state: ResultState): ResultState => {
     return {
@@ -37,8 +37,8 @@ export const reducer = createReducer(
         results: [],
         isLoading: false
       }
-    }
+    };
   })
-)
+);
 
 

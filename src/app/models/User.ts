@@ -6,7 +6,7 @@ export interface User {
   roles: Roles;
 }
 
-export interface Roles { 
+export interface Roles {
     subscriber?: boolean;
     student?: boolean;
     admin?: boolean;

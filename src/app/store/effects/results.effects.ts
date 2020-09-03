@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of, Observable } from 'rxjs';
 import { map, mergeMap, catchError, switchMap, concatMap, withLatestFrom, tap, filter } from 'rxjs/operators';
 import { RouterActions, QuizActions, ResultsActions } from '../actions';
-import * as routerSelectors from '../selectors/router.selector'
+import * as routerSelectors from '../selectors/router.selector';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../models/AppState';
 import { Area } from '../../models/ConfigState';
@@ -32,36 +32,36 @@ export class ResultsEffects {
     this.responses$ = this.store.pipe(select(selectResponses));
   }
 
-   loadResults$ = createEffect(() => this.actions$.pipe(    
-      ofType(ResultsActions.LoadResults),    
-      concatMap((actions) => of(actions).pipe(withLatestFrom(this.user$))),  
+   loadResults$ = createEffect(() => this.actions$.pipe(
+      ofType(ResultsActions.LoadResults),
+      concatMap((actions) => of(actions).pipe(withLatestFrom(this.user$))),
       switchMap(([, user]) => {
         return this.resultSvc.getResults(user.uid).pipe(
           map(categories => ResultsActions.LoadResultsSuccess({ payload: categories }))
-        )
+        );
       }),
       catchError(() => of(ResultsActions.LoadResultsFailure()))
-  ));  
-  
-  saveResult$ = createEffect(() => this.actions$.pipe(    
-      ofType(QuizActions.SaveResults),      
+  ));
+
+  saveResult$ = createEffect(() => this.actions$.pipe(
+      ofType(QuizActions.SaveResults),
       concatMap((actions) => of(actions).pipe(withLatestFrom(this.user$, this.form$, this.responses$))),
       switchMap(([, user, form, responses]) => {
          const { serverTimestamp } = firebase.firestore.FieldValue;
-    
-        const result: Result = {
+
+         const result: Result = {
           uid: user.uid,
           displayName: user.displayName,
           form,
           responses,
           createdAt: serverTimestamp()
-    
-        }        
-        return of(this.resultSvc.addResult(result)).pipe(
-          switchMap(() => [ QuizActions.SaveResultsSuccess(), RouterActions.Go({ payload: { path: ["/results"] } }) ])
-        )
+
+        };
+         return of(this.resultSvc.addResult(result)).pipe(
+          switchMap(() => [ QuizActions.SaveResultsSuccess(), RouterActions.Go({ payload: { path: ['/results'] } }) ])
+        );
       }),
       catchError(() => of(QuizActions.SaveResultsFailure()))
-  ));  
+  ));
 
 }

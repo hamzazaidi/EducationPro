@@ -1,4 +1,4 @@
-import { DisplayQuestions } from "./Question";
+import { DisplayQuestions } from './Question';
 
 export interface Result {
   uid: string;
@@ -6,7 +6,7 @@ export interface Result {
   form: {
     category: string;
     subCategory: string;
-  },
-  responses: DisplayQuestions[],
+  };
+  responses: DisplayQuestions[];
   createdAt: any;
 }

@@ -1,7 +1,7 @@
-import { QuizService } from "./quiz.service";
-import { AuthService } from "./auth.service";
-import { CategoryService } from "./category.service";
-import { ResultsService } from "./results.service";
+import { QuizService } from './quiz.service';
+import { AuthService } from './auth.service';
+import { CategoryService } from './category.service';
+import { ResultsService } from './results.service';
 
 
 export const services: any[] = [
@@ -9,4 +9,4 @@ export const services: any[] = [
   AuthService,
   CategoryService,
   ResultsService
-]
+];

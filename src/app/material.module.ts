@@ -29,7 +29,7 @@ const components: any[] = [
   MatRadioModule,
   MatMenuModule,
   MatExpansionModule
-]
+];
 
 @NgModule({
   imports: [CommonModule, ...components],
