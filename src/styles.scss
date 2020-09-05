@@ -163,7 +163,7 @@ $mat-primary: (
     darker: #10122a,
     200: #1b1f40,
     // For slide toggle,
-        contrast:
+    contrast:
         (
             main: $light-primary-text,
             lighter: $dark-primary-text,
@@ -187,7 +187,7 @@ $mat-accent: (
     darker: #6625b3,
     200: #833ac7,
     // For slide toggle,
-        contrast:
+    contrast:
         (
             main: $light-primary-text,
             lighter: $dark-primary-text,
@@ -211,7 +211,7 @@ $mat-warn: (
     darker: #ff0000,
     200: #ff0000,
     // For slide toggle,
-        contrast:
+    contrast:
         (
             main: $light-primary-text,
             lighter: $dark-primary-text,
@@ -296,6 +296,10 @@ button.mat-accent:enabled {
 }
 
 .mat-form-field.mat-focused .mat-form-field-label {
+    color: $light-text;
+}
+
+input.mat-input-element {
     color: $light-text;
 }
 

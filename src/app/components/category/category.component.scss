@@ -3,10 +3,11 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  > * {
+  > *:not(button) {
     flex-grow: 1;
+    min-width: 250px;
   }
   button {
-    height: 60px;
+    align-self: center;
   }
 }

@@ -21,6 +21,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AdministratorComponent } from './containers/administrator/administrator.component';
+import { ConfigurationComponent } from './containers/configuration/configuration.component';
+import { CategoryComponent } from './components/category/category.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDqzcZ6yLDINgpEa2Sfw1plEDuVcbjdv7Q',
@@ -34,7 +36,7 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  imports:      [
+  imports: [
     CommonModule,
     BrowserModule,
     FormsModule,
@@ -45,7 +47,7 @@ const firebaseConfig = {
     StoreModule.forRoot(ROOT_REDUCER),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),
-     StoreDevtoolsModule.instrument({
+    StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: true, // Restrict extension to log-only mode
     }),
@@ -53,11 +55,19 @@ const firebaseConfig = {
     AngularFirestoreModule,
     AngularFireAuthModule,
   ],
-  declarations: [ AppComponent, WelcomeComponent, QuizComponent, ResultsComponent, AdministratorComponent ],
+  declarations: [
+    AppComponent,
+    WelcomeComponent,
+    QuizComponent,
+    ResultsComponent,
+    AdministratorComponent,
+    ConfigurationComponent,
+    CategoryComponent
+  ],
   providers: [
     ...guards,
     ...services
   ],
-  bootstrap:    [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
