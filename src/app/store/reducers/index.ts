@@ -5,13 +5,16 @@ import { AppState } from '../../models/AppState';
 import * as fromQuizReducer from './quiz.reducer';
 import * as fromConfigReducer from './config.reducer';
 import * as fromResultsReducer from './results.reducer';
+import * as fromSettingsReducer from './settings.reducer';
 
-export const ROOT_REDUCER = new InjectionToken<ActionReducerMap<AppState, Action>>(
-  'Root Reducer token', {
-    factory: () => ({
-      config: fromConfigReducer.reducer,
-      router: routerReducer,
-      quiz: fromQuizReducer.reducer,
-      results: fromResultsReducer.reducer
-    })
-  });
+export const ROOT_REDUCER = new InjectionToken<
+  ActionReducerMap<AppState, Action>
+>('Root Reducer token', {
+  factory: () => ({
+    config: fromConfigReducer.reducer,
+    router: routerReducer,
+    quiz: fromQuizReducer.reducer,
+    results: fromResultsReducer.reducer,
+    settings: fromSettingsReducer.reducer,
+  }),
+});

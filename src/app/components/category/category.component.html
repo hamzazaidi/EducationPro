@@ -1,0 +1,25 @@
+<div>
+  <form [formGroup]="categoryForm" class="add-data">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Area</mat-label>
+      <mat-select formControlName="area">
+        <mat-option class="mat-subheading-1" value="general-knowledge">
+          general-knowledge
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Add Category</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <button mat-raised-button color="accent" [disabled]="categoryForm.invalid">Add</button>             
+  </form>
+</div>
+
+
+
+<ng-template #loader>
+	<div>
+		<mat-spinner color="accent" diameter="30"></mat-spinner>
+	</div>
+</ng-template>

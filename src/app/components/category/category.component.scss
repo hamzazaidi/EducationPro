@@ -1,0 +1,12 @@
+.add-data {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  > * {
+    flex-grow: 1;
+  }
+  button {
+    height: 60px;
+  }
+}
