@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    nav {
+        ul {
+            list-style-type: none;
+            background: #1b1f40;
+            padding: 0;
+            margin: 0;
+            li {
+                padding: 10px 20px;
+                width: 200px;
+                transition: all linear 100ms;
+                box-sizing: border-box;
+                background: transparent;
+                a {
+                    color: #ffffff;
+                    padding: 0;
+                    margin: 0;
+                    text-decoration: none;
+                }
+                &.active-link {
+                    border-left: 5px solid #fff;
+                    background: #202344;
+                }
+            }
+        }
+    }
+}

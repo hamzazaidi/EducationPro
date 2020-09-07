@@ -7,6 +7,7 @@ import { ResultsComponent } from './containers/results/results.component';
 import { AdministratorComponent } from './containers/administrator/administrator.component';
 import { CanActivateAdminGuard } from './guards/can-activate-admin.guard';
 import { ConfigurationComponent } from './containers/configuration/configuration.component';
+import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
   {
@@ -28,9 +29,27 @@ const routes: Routes = [
   },
   {
     path: 'configuration',
-    component: ConfigurationComponent,
-    data: { title: 'Configuration' },
     canActivate: [CanActivateAdminGuard],
+    component: ConfigurationComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/configuration/category', //full child path
+        pathMatch: 'full',
+      },
+      {
+        path: 'category',
+        component: CategoryComponent,
+      },
+      {
+        path: 'sub-category',
+        component: CategoryComponent,
+      },
+      {
+        path: 'quiz',
+        component: CategoryComponent,
+      },
+    ],
   },
   {
     path: 'settings',

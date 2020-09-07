@@ -1,12 +1,22 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { ResultState } from "../../models/ResultState";
-import { Category } from "../../models/Category";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ResultState } from '../../models/ResultState';
+import { Category } from '../../models/Category';
 import * as firebase from 'firebase';
-import { SettingsState } from "../../models/SettingsState";
+import { SettingsState } from '../../models/SettingsState';
 
-const getSettingsState = createFeatureSelector<SettingsState>("settings");
+const getSettingsState = createFeatureSelector<SettingsState>('settings');
 
-export const selectLoadingCategories = createSelector(getSettingsState, (state: SettingsState) => state.categories.isLoading)
+export const selectMenus = createSelector(
+  getSettingsState,
+  (state: SettingsState) => state.menu
+);
 
-export const selectCategories = createSelector(getSettingsState, (state: SettingsState) => state.categories.items)
+export const selectLoadingCategories = createSelector(
+  getSettingsState,
+  (state: SettingsState) => state.categories.isLoading
+);
 
+export const selectCategories = createSelector(
+  getSettingsState,
+  (state: SettingsState) => state.categories.items
+);

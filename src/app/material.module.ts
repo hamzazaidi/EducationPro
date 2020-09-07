@@ -13,6 +13,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 
 const components: any[] = [
@@ -28,7 +29,8 @@ const components: any[] = [
   MatTabsModule,
   MatRadioModule,
   MatMenuModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatListModule
 ]
 
 @NgModule({

@@ -1,9 +1,18 @@
 <div class="container">
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="First">
-      <app-category></app-category>
-    </mat-tab>
-    <mat-tab label="Second">Content 2</mat-tab>
-    <mat-tab label="Third">Content 3</mat-tab>
-  </mat-tab-group>
+  <div>
+    <nav>
+      <ul>
+        <ng-container *ngFor="let menu of menus$ | async">
+          <li routerLinkActive="active-link">
+            <a class="mat-title" routerLink="{{ menu.path }}"
+              >{{ menu.value }}</a
+            >
+          </li>
+        </ng-container>
+      </ul>
+    </nav>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </div>
