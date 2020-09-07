@@ -26,7 +26,8 @@ export class CategoryComponent implements OnInit {
     });
 
     this.editForm = this.fb.group({
-      categories: this.fb.array([]),
+      area: ['', { validators: [Validators.required] }],
+      name: ['', { validators: [Validators.required] }],
     });
 
     this.categories$ = this.store.pipe(select(selectCategories));
@@ -35,5 +36,11 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(SettingsActions.LoadCategories());
+  }
+
+  toggle(category: EditableCategory) {
+    this.store.dispatch(
+      SettingsActions.ToggleEditCategory({ payload: category })
+    );
   }
 }

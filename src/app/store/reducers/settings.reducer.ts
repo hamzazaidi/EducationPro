@@ -51,5 +51,22 @@ export const reducer = createReducer(
         },
       };
     }
+  ),
+  on(
+    SettingsActions.ToggleEditCategory,
+    (state: SettingsState, { payload }): SettingsState => {
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          items: [
+            ...state.categories.items.map((c) => ({
+              ...c,
+              isEditing: c.key === payload.key,
+            })),
+          ],
+        },
+      };
+    }
   )
 );

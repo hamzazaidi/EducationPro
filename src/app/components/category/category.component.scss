@@ -19,6 +19,11 @@
 .mat-list-base {
   .mat-list-item {
     border-bottom: 1px solid #313131;
+    transition: all 300ms linear;
+    height: 48px;
+    &.isEditing {
+      height: 85px;
+    }
     .content {
       flex-grow: 1;
       margin: 0;
@@ -31,4 +36,13 @@
 
 button.mat-button-base {
   border: 0;
+}
+
+.edit-data {
+  ::ng-deep .mat-form-field-wrapper {
+    margin-bottom: -1.25em;
+  }
+  .mat-form-field {
+    margin-right: 10px;
+  }
 }
