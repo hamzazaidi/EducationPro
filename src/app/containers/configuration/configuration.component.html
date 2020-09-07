@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <ng-container *ngFor="let menu of menus$ | async">
-          <li routerLinkActive="active-link">
+          <li routerLinkActive="active-link" matRipple>
             <a class="mat-title" routerLink="{{ menu.path }}"
               >{{ menu.value }}</a
             >
@@ -12,7 +12,7 @@
       </ul>
     </nav>
   </div>
-  <div>
+  <div class="data">
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -6,28 +6,31 @@ import { Observable } from 'rxjs';
 import { Category } from '../../models/Category';
 import { selectLoadingCategories } from '../../store/selectors/settings.selector';
 import { selectCategories } from '../../store/selectors/settings.selector';
+import { EditableCategory } from 'src/app/models/SettingsState';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
-  categoryForm: FormGroup
-  categories$: Observable<Category[]>;
+  addForm: FormGroup;
+  editForm: FormGroup;
+  categories$: Observable<EditableCategory[]>;
   loadingCategories$: Observable<boolean>;
   constructor(private store: Store<AppState>, private fb: FormBuilder) {
-    this.categoryForm = this.fb.group({
-      area: ['',  { validators: [ Validators.required ] }],
-      name: ['',  { validators: [ Validators.required ] }],     
-      categories: this.fb.array([]) 
-    })
+    this.addForm = this.fb.group({
+      area: ['', { validators: [Validators.required] }],
+      name: ['', { validators: [Validators.required] }],
+    });
+
+    this.editForm = this.fb.group({
+      categories: this.fb.array([]),
+    });
 
     this.categories$ = this.store.pipe(select(selectCategories));
     this.loadingCategories$ = this.store.pipe(select(selectLoadingCategories));
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
