@@ -21,6 +21,19 @@
       <mat-icon>add</mat-icon>
     </button>
   </form>
+  <div>
+    <mat-list>
+      <mat-list-item *ngFor="let category of categories$ | async">
+        <div class="content mat-title">{{ category.value }}</div>
+        <button mat-icon-button>
+          <mat-icon>create</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>
 
 <ng-template #loader>

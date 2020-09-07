@@ -7,6 +7,7 @@ import { Category } from '../../models/Category';
 import { selectLoadingCategories } from '../../store/selectors/settings.selector';
 import { selectCategories } from '../../store/selectors/settings.selector';
 import { EditableCategory } from 'src/app/models/SettingsState';
+import { SettingsActions } from 'src/app/store/actions';
 
 @Component({
   selector: 'app-category',
@@ -32,5 +33,7 @@ export class CategoryComponent implements OnInit {
     this.loadingCategories$ = this.store.pipe(select(selectLoadingCategories));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(SettingsActions.LoadCategories());
+  }
 }
