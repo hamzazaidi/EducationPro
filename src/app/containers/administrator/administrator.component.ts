@@ -10,92 +10,98 @@ import { QuizService } from '../../services/quiz.service';
 @Component({
   selector: 'app-administrator',
   templateUrl: './administrator.component.html',
-  styleUrls: ['./administrator.component.scss']
+  styleUrls: ['./administrator.component.scss'],
 })
 export class AdministratorComponent implements OnInit {
-
   private categoryCollection: Category[] = [];
   categoryForm: FormGroup;
   subCategoryForm: FormGroup;
   quizForm: FormGroup;
-  constructor(private categorySvc: CategoryService, private quizSvc: QuizService, private fb: FormBuilder) {
+  constructor(
+    private categorySvc: CategoryService,
+    private quizSvc: QuizService,
+    private fb: FormBuilder
+  ) {
     this.categoryForm = this.fb.group({
-      name: ['',  { validators: [ Validators.required ] }],
-      categories: this.fb.array([])
+      name: ['', { validators: [Validators.required] }],
+      categories: this.fb.array([]),
     });
 
     this.subCategoryForm = this.fb.group({
-      name: ['',  { validators: [ Validators.required ] }],
-      category: ['',  { validators: [ Validators.required ] }],
+      name: ['', { validators: [Validators.required] }],
+      category: ['', { validators: [Validators.required] }],
       resource: this.fb.group({
-        type: ['',  { validators: [ Validators.required ] }],
-        url: ['',  { validators: [ Validators.required ] }],
-        description: ['',  { validators: [ Validators.required ] }]
+        type: ['', { validators: [Validators.required] }],
+        url: ['', { validators: [Validators.required] }],
+        description: ['', { validators: [Validators.required] }],
       }),
-      subCategories: this.fb.array([])
+      subCategories: this.fb.array([]),
     });
 
     this.quizForm = this.fb.group({
-      question: ['',  { validators: [ Validators.required ] }],
+      question: ['', { validators: [Validators.required] }],
       answers: this.fb.array([
         this.fb.group({
-          value: ['',  { validators: [ Validators.required ] }]
+          value: ['', { validators: [Validators.required] }],
         }),
         this.fb.group({
-          value: ['',  { validators: [ Validators.required ] }]
+          value: ['', { validators: [Validators.required] }],
         }),
         this.fb.group({
-          value: ['',  { validators: [ Validators.required ] }]
+          value: ['', { validators: [Validators.required] }],
         }),
         this.fb.group({
-          value: ['',  { validators: [ Validators.required ] }]
-        })
+          value: ['', { validators: [Validators.required] }],
+        }),
       ]),
-      category: ['',  { validators: [ Validators.required ] }],
-      correct: ['',  { validators: [ Validators.required ] }],
-      questions: this.fb.array([])
+      category: ['', { validators: [Validators.required] }],
+      correct: ['', { validators: [Validators.required] }],
+      questions: this.fb.array([]),
     });
-    console.log('quizForm ==>', this.quizForm);
   }
 
   ngOnInit() {
-    this.categorySvc.getCategories({ cache: false }).subscribe(data => {
+    this.categorySvc.getCategories({ cache: false }).subscribe((data) => {
       this.categoryCollection = data;
       this.categories.clear();
-      this.categoryList.forEach(c => {
+      this.categoryList.forEach((c) => {
         const { area, key, value, parent } = c;
         this.categories.push(this.fb.group({ area, key, value, parent }));
       });
 
       this.subCategories.clear();
-      this.subCategoryList.forEach(c => {
-        console.log('c ==>', c);
+      this.subCategoryList.forEach((c) => {
         const { key, value, parent, resource } = c;
-        this.subCategories.push(this.fb.group({
-            key, value, parent,
+        this.subCategories.push(
+          this.fb.group({
+            key,
+            value,
+            parent,
             resource: this.fb.group({
-              ...resource
-            })
-        }));
-        console.log('this.subCategories ==>', this.subCategories);
+              ...resource,
+            }),
+          })
+        );
       });
     });
 
-    this.quizForm.get('category').valueChanges.subscribe(value => {
-      this.quizSvc.getQuestions(value).subscribe(data => {
+    this.quizForm.get('category').valueChanges.subscribe((value) => {
+      this.quizSvc.getQuestions(value).subscribe((data) => {
         this.questions.clear();
-        data.forEach(q => {
+        data.forEach((q) => {
           const { key, category, question, answers } = q;
-          this.questions.push(this.fb.group({
+          this.questions.push(
+            this.fb.group({
               key,
               category,
               question,
-              answers: this.fb.array(answers.map(a => this.fb.group({ value: a.value }))),
-              correct: this.fb.control(answers.findIndex(a => a.isCorrect))
-            }));
+              answers: this.fb.array(
+                answers.map((a) => this.fb.group({ value: a.value }))
+              ),
+              correct: this.fb.control(answers.findIndex((a) => a.isCorrect)),
+            })
+          );
         });
-
-        console.log('This is quiz form after populated', this.quizForm);
       });
     });
   }
@@ -107,7 +113,7 @@ export class AdministratorComponent implements OnInit {
     this.categorySvc.addCategory({
       value: name,
       parent: '-1',
-      area: Area.GeneralKnowledge
+      area: Area.GeneralKnowledge,
     });
   }
 
@@ -120,7 +126,7 @@ export class AdministratorComponent implements OnInit {
     this.categorySvc.addCategory({
       value: name,
       parent: category,
-      resource
+      resource,
     });
   }
 
@@ -133,32 +139,27 @@ export class AdministratorComponent implements OnInit {
   }
 
   onDelete(key) {
-    console.log('Key ==>', key);
     this.categorySvc.deleteCategory(key);
   }
 
   onUpdate(category) {
-    console.log('Key ==>', category);
     this.categorySvc.updateCategory(category);
   }
 
   onQuestionDelete(key) {
-    console.log('Key ==>', key);
     this.quizSvc.deleteQuestion(key);
   }
 
   onQuestionUpdate(question) {
-    console.log('Key ==>', question);
     this.quizSvc.updateQuestion(question);
   }
 
-
   get categoryList() {
-    return this.categoryCollection.filter(c => c.parent === '-1');
+    return this.categoryCollection.filter((c) => c.parent === '-1');
   }
 
   get subCategoryList() {
-    return this.categoryCollection.filter(c => c.parent !== '-1');
+    return this.categoryCollection.filter((c) => c.parent !== '-1');
   }
 
   get categories(): FormArray {
@@ -176,6 +177,4 @@ export class AdministratorComponent implements OnInit {
   get answers(): FormArray {
     return this.quizForm.get('answers') as FormArray;
   }
-
-
 }
