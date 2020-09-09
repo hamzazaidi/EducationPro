@@ -4,8 +4,10 @@ import { selectArea } from './config.selector';
 
 export const numOfCorrectAnswers = (state) => {
   return state.responses.reduce((acc, curr) => {
-    const isCorrect = curr.answers.find(a => a.selected && a.isCorrect);
-    if (isCorrect) { acc = acc + 1;  }
+    const isCorrect = curr.answers.find((a) => a.selected && a.isCorrect);
+    if (isCorrect) {
+      acc = acc + 1;
+    }
     return acc;
   }, 0);
 };
@@ -14,15 +16,21 @@ export const totalResponses = (state) => state.responses.length;
 
 const getQuizState = createFeatureSelector<QuizState>('quiz');
 
-export const selectLoadingCategories = createSelector(getQuizState, (state: QuizState) => state.categories.isLoading);
+export const selectLoadingCategories = createSelector(
+  getQuizState,
+  (state: QuizState) => state.categories.isLoading
+);
 
-export const selectCategories = createSelector(getQuizState, (state: QuizState) => state.categories.items);
+export const selectCategories = createSelector(
+  getQuizState,
+  (state: QuizState) => state.categories.items
+);
 
 export const selectCategoriesByParent = createSelector(
   selectCategories,
   selectArea,
   (categories, area, props) => {
-    return categories.filter(category => {
+    return categories.filter((category) => {
       let isMatch = true;
       if (category.area) {
         isMatch = category.area === area;
@@ -32,15 +40,20 @@ export const selectCategoriesByParent = createSelector(
   }
 );
 
-export const selectLoadingQuestions = createSelector(getQuizState, (state: QuizState) => state.quizStore.isLoading);
+export const selectLoadingQuestions = createSelector(
+  getQuizState,
+  (state: QuizState) => state.quizStore.isLoading
+);
 
 export const selectQuestion = createSelector(getQuizState, (state) => {
-  if (!state.questionOnScreen.key) { return null; }
+  if (!state.questionOnScreen.key) {
+    return null;
+  }
   return state.questionOnScreen;
 });
 
 export const selectAnswerIsSelected = createSelector(getQuizState, (state) => {
-  return state.questionOnScreen.answers.some(a => a.selected);
+  return state.questionOnScreen.answers.some((a) => a.selected);
 });
 
 export const selectRevealAnswer = createSelector(getQuizState, (state) => {
@@ -76,7 +89,6 @@ export const selectPhrase = createSelector(getQuizState, (state) => {
   return phrase;
 });
 
-
 export const selectColor = createSelector(getQuizState, (state) => {
   const num = numOfCorrectAnswers(state);
   const total = totalResponses(state);
@@ -92,29 +104,38 @@ export const selectColor = createSelector(getQuizState, (state) => {
   return color;
 });
 
-
 export const selectForm = createSelector(getQuizState, (state) => {
   return state.form;
 });
 
-export const selectResourceByCategoryId = createSelector(selectCategories, (categories, props) => {
-  const category = categories.find(c => c.key === props.key);
-  if (!category) { return null; }
-  const { resource } = category;
-  return resource;
-});
+export const selectResourceByCategoryId = createSelector(
+  selectCategories,
+  (categories, props) => {
+    const category = categories.find((c) => c.key === props.key);
+    if (!category) {
+      return null;
+    }
+    const { resource } = category;
+    return resource;
+  }
+);
 
 export const selectShowResource = createSelector(getQuizState, (state) => {
   return state.showResource;
 });
 
-
 export const selectResponses = createSelector(getQuizState, (state) => {
   return state.responses;
 });
 
+export const selectTotalResponses = createSelector(getQuizState, (state) => {
+  return state.responses.length;
+});
+
+export const selectTotalQuestions = createSelector(getQuizState, (state) => {
+  return state.quizStore.items.length;
+});
 
 export const selectIsSavingResult = createSelector(getQuizState, (state) => {
   return state.savingResult;
 });
-

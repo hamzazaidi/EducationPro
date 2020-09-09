@@ -1,66 +1,97 @@
 <div class="container">
-	<form [formGroup]="form">
-		<div *ngIf="!(loadingCategories$ | async); else loader">
-			<mat-form-field appearance="fill">
-				<mat-label>Select Category</mat-label>
-				<mat-select formControlName="category">
-					<mat-option class="mat-subheading-1" *ngFor="let category of categories$ | async"
-						[value]="category.key">
-						{{category.value}}
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<mat-form-field appearance="fill">
-				<mat-label>Select Quiz</mat-label>
-				<mat-select formControlName="subCategory">
-					<mat-option class="mat-subheading-1" *ngFor="let category of subCategories$ | async"
-						[value]="category.key">
-						{{category.value}}
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<div class="resource" *ngIf="(resource$ | async) && (showResource$ | async)">
-				<mat-card>
-					<a mat-raised-button color="warn" target="_blank" [href]="(resource$ | async)?.url">
-						<mat-icon>play_arrow</mat-icon>
-					</a>
-					<div class="mat-subheading-1">{{ (resource$ | async)?.description }}</div>
-					<button mat-mini-fab class="close" (click)="hideResource()">
-          <mat-icon>clear</mat-icon>
-        </button>
-				</mat-card>
-			</div>
-		</div>
-	</form>
-	<section>
-		<div *ngIf="!(loadingQuestions$ | async); else loader">
-			<ng-container *ngIf="(question$ | async)">
-				<mat-progress-bar mode="indeterminate" [ngClass]="{ isRevealing: revealAnswer$ | async }">
-				</mat-progress-bar>
-				<mat-card class="mat-display-1">{{ (question$ | async)?.question }}</mat-card>
-				<div class="answers" [ngClass]="{ isRevealing: revealAnswer$ | async }">
-					<ng-container *ngFor="let answer of (question$ | async)?.answers">
-						<button
+  <form [formGroup]="form">
+    <div *ngIf="!(loadingCategories$ | async); else loader">
+      <mat-form-field appearance="fill">
+        <mat-label>Select Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option
+            class="mat-subheading-1"
+            *ngFor="let category of categories$ | async"
+            [value]="category.key"
+          >
+            {{category.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Select Quiz</mat-label>
+        <mat-select formControlName="subCategory">
+          <mat-option
+            class="mat-subheading-1"
+            *ngFor="let category of subCategories$ | async"
+            [value]="category.key"
+          >
+            {{category.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div
+        class="resource"
+        *ngIf="(resource$ | async) && (showResource$ | async)"
+      >
+        <mat-card>
+          <a
+            mat-raised-button
+            color="warn"
+            target="_blank"
+            [href]="(resource$ | async)?.url"
+          >
+            <mat-icon>play_arrow</mat-icon>
+          </a>
+          <div class="mat-subheading-1">
+            {{ (resource$ | async)?.description }}
+          </div>
+          <button mat-mini-fab class="close" (click)="hideResource()">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-card>
+      </div>
+    </div>
+  </form>
+  <section>
+    <div *ngIf="!(loadingQuestions$ | async); else loader">
+      <ng-container *ngIf="(question$ | async)">
+        <app-progress-dots
+          [total]="(totalQuestions$ | async)"
+          [current]="(totalResponses$ | async)"
+        ></app-progress-dots>
+        <mat-progress-bar
+          mode="indeterminate"
+          [ngClass]="{ isRevealing: revealAnswer$ | async }"
+        >
+        </mat-progress-bar>
+        <mat-card class="mat-display-1"
+          >{{ (question$ | async)?.question }}</mat-card
+        >
+        <div class="answers" [ngClass]="{ isRevealing: revealAnswer$ | async }">
+          <ng-container *ngFor="let answer of (question$ | async)?.answers">
+            <button
               mat-raised-button
-              (click)=selectAnswer(answer)
-              [ngClass]="{ isSelected: answer.selected, isValid: answer.isCorrect }">
-            {{answer.value}}
+              (click)="selectAnswer(answer)"
+              [ngClass]="{ isSelected: answer.selected, isValid: answer.isCorrect }"
+            >
+              {{answer.value}}
             </button>
-					</ng-container>
-				</div>
-				<mat-divider></mat-divider>
-				<div class="next-btn">
-					<button mat-raised-button color="accent" [disabled]="!(answerIsSelected$ | async) || (revealAnswer$ | async) || (savingResult$ | async)" (click)="onNext()">
+          </ng-container>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="next-btn">
+          <button
+            mat-raised-button
+            color="accent"
+            [disabled]="!(answerIsSelected$ | async) || (revealAnswer$ | async) || (savingResult$ | async)"
+            (click)="onNext()"
+          >
             {{ (savingResult$ | async) ? 'Saving': 'Next' }}
           </button>
-				</div>
-			</ng-container>
-		</div>
-	</section>
+        </div>
+      </ng-container>
+    </div>
+  </section>
 </div>
 
 <ng-template #loader>
-	<div>
-		<mat-spinner color="accent" diameter="30"></mat-spinner>
-	</div>
+  <div>
+    <mat-spinner color="accent" diameter="30"></mat-spinner>
+  </div>
 </ng-template>

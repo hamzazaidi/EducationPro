@@ -17,6 +17,8 @@ import {
   selectShowResource,
   selectLoadingQuestions,
   selectIsSavingResult,
+  selectTotalQuestions,
+  selectTotalResponses,
 } from '../../store/selectors/quiz.selector';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { distinctUntilChanged, take } from 'rxjs/operators';
@@ -47,6 +49,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   revealAnswer$: Observable<boolean>;
   form$: Observable<{ category: string; subCategory: string }>;
   quizStatus$: Observable<QuizStatus>;
+  totalQuestions$: Observable<number>;
+  totalResponses$: Observable<number>;
   resource$: Observable<{
     type: ResourceType;
     url: string;
@@ -71,6 +75,8 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.showResource$ = this.store.pipe(select(selectShowResource));
     this.loadingQuestions$ = this.store.pipe(select(selectLoadingQuestions));
     this.savingResult$ = this.store.pipe(select(selectIsSavingResult));
+    this.totalQuestions$ = this.store.pipe(select(selectTotalQuestions));
+    this.totalResponses$ = this.store.pipe(select(selectTotalResponses));
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((s) => s.unsubscribe());

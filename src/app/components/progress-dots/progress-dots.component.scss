@@ -1,0 +1,18 @@
+.progress-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    .dot {
+        width: 10px;
+        height: 10px;
+        border: 1px solid #e2e2e2;
+        border-radius: 50%;
+        margin: 0 5px;
+        transition: all ease-in 100ms;
+        &.filled {
+            background: #833ac7;
+            border: 1px solid #9a86b1;
+            box-shadow: 0px 0px 10px #833ac7;
+        }
+    }
+}

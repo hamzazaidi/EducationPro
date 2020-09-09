@@ -1,0 +1,5 @@
+<div class="progress-wrapper">
+  <ng-container *ngFor="let dot of dots; index as i">
+    <div class="dot" [ngClass]="{'filled': current >= i }"></div>
+  </ng-container>
+</div>

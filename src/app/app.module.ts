@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AdministratorComponent } from './containers/administrator/administrator.component';
+import { ProgressDotsComponent } from './components/progress-dots/progress-dots.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDqzcZ6yLDINgpEa2Sfw1plEDuVcbjdv7Q',
@@ -30,11 +31,11 @@ const firebaseConfig = {
   storageBucket: 'quiz-8ab36.appspot.com',
   messagingSenderId: '793942175810',
   appId: '1:793942175810:web:3ccb4a461e8499b4a77ddb',
-  measurementId: 'G-Z5Z1K0P9C6'
+  measurementId: 'G-Z5Z1K0P9C6',
 };
 
 @NgModule({
-  imports:      [
+  imports: [
     CommonModule,
     BrowserModule,
     FormsModule,
@@ -45,7 +46,7 @@ const firebaseConfig = {
     StoreModule.forRoot(ROOT_REDUCER),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),
-     StoreDevtoolsModule.instrument({
+    StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: true, // Restrict extension to log-only mode
     }),
@@ -53,11 +54,15 @@ const firebaseConfig = {
     AngularFirestoreModule,
     AngularFireAuthModule,
   ],
-  declarations: [ AppComponent, WelcomeComponent, QuizComponent, ResultsComponent, AdministratorComponent ],
-  providers: [
-    ...guards,
-    ...services
+  declarations: [
+    AppComponent,
+    WelcomeComponent,
+    QuizComponent,
+    ResultsComponent,
+    AdministratorComponent,
+    ProgressDotsComponent,
   ],
-  bootstrap:    [ AppComponent ]
+  providers: [...guards, ...services],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
