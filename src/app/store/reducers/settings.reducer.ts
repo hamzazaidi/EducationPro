@@ -55,6 +55,7 @@ export const reducer = createReducer(
   on(
     SettingsActions.ToggleEditCategory,
     (state: SettingsState, { payload }): SettingsState => {
+      console.log('Payload ==>', payload);
       return {
         ...state,
         categories: {
@@ -62,7 +63,7 @@ export const reducer = createReducer(
           items: [
             ...state.categories.items.map((c) => ({
               ...c,
-              isEditing: c.key === payload.key,
+              isEditing: c.key === payload.key && !c.isEditing,
             })),
           ],
         },

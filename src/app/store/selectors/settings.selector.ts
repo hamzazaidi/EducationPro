@@ -18,5 +18,6 @@ export const selectLoadingCategories = createSelector(
 
 export const selectCategories = createSelector(
   getSettingsState,
-  (state: SettingsState) => state.categories.items
+  (state: SettingsState) =>
+    state.categories.items.filter((i) => i.parent === '-1')
 );

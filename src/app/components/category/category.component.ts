@@ -22,12 +22,12 @@ export class CategoryComponent implements OnInit {
   constructor(private store: Store<AppState>, private fb: FormBuilder) {
     this.addForm = this.fb.group({
       area: ['', { validators: [Validators.required] }],
-      name: ['', { validators: [Validators.required] }],
+      value: ['', { validators: [Validators.required] }],
     });
 
     this.editForm = this.fb.group({
       area: ['', { validators: [Validators.required] }],
-      name: ['', { validators: [Validators.required] }],
+      value: ['', { validators: [Validators.required] }],
     });
 
     this.categories$ = this.store.pipe(select(selectCategories));
@@ -39,8 +39,21 @@ export class CategoryComponent implements OnInit {
   }
 
   toggle(category: EditableCategory) {
+    this.editForm.patchValue(category);
     this.store.dispatch(
       SettingsActions.ToggleEditCategory({ payload: category })
     );
+  }
+
+  save() {
+    const { area, value } = this.addForm.getRawValue();
+    const category: EditableCategory = {
+      isEditing: false,
+      key: '-1',
+      parent: '-1',
+      value,
+      area,
+    };
+    this.store.dispatch(SettingsActions.SaveCategory({ payload: category }));
   }
 }
